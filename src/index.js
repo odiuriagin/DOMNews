@@ -34,19 +34,33 @@ $l.extend = (base, ...otherObjects) => {
 }
 
 $l.ajax = (options) => {
-
-    let defaults = {
-        data: {},
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-        method: "GET",
-        url: "",
-        success: () => {},
-        error: () => {},
+    const request = new XMLHttpRequest();
+    const defaults = {
+      contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+      method: "GET",
+      url: "",
+      success: () => {},
+      error: () => {},
+      data: {},
+      dataType: 'json',
     };
+    options = $l.extend(defaults, options);
+    options.method = options.method.toUpperCase();
 
-    const request = $l.extend(defaults, options);
-
-}
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open(options.method, options.url);
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            resolve(JSON.parse(xhr.response));
+          } else {
+            reject(JSON.parse(xhr.response));
+          }
+        };
+        xhr.send(JSON.stringify(options.data));
+      })
+  };
+  
 
 document.addEventListener('DOMContentLoaded', () => {
     ready = true;
@@ -62,7 +76,7 @@ $l( () => {
 getNews = () => {
     const $input = $(".news-subject").val();
     event.preventDefault();
-    $.ajax({method: 'get', url: `https://newsapi.org/v2/everything?q=${$input}&apiKey=47feb2c99f604fe2bb308b7ffd24335d`})
+    $l.ajax({method: 'get', url: `https://newsapi.org/v2/everything?q=${$input}&apiKey=47feb2c99f604fe2bb308b7ffd24335d`})
     .then((result) => handleResult(result))
 }
 
@@ -73,7 +87,7 @@ handleResult = (result) => {
     $li = $('<li></li>')
     $li.html(result.articles[0].description);
     $('.news-list').append($li);
-    console.log(result.articles[0]);
+    console.log(result);
 }
 
 
