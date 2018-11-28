@@ -1,0 +1,9 @@
+p {
+    margin: 6px;
+}
+
+form {
+    margin: 0 auto;
+    width: 28%;
+    display: flex;
+}
