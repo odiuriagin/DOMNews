@@ -7,3 +7,47 @@ form {
     width: 28%;
     display: flex;
 }
+
+.news-title {
+    width: 100%;
+    margin: 20px auto;
+    font-size: 24px;
+    text-align: center;
+}
+
+.news-image {
+    width: 50%;
+    height: 30%;
+    margin: 0 auto;
+    display: block;
+}
+
+.news-content {
+    width: 70%;
+    margin: 30px auto;
+}
+
+.news-link {
+    display: block;
+    margin: 0 auto;
+    width: 28%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.rotate-image {
+    perspective: 300px;
+    animation: animate-x 5s infinite linear;
+  }
+
+@keyframes animate-x {
+0% { transform: rotateX(0); }
+100% { transform: rotateX(360deg); }
+}
+
+.spin-button {
+    width: 10%;
+    height: 28px;
+    margin: 24px auto;
+    display: block;
+}

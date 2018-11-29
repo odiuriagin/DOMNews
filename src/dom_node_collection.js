@@ -37,7 +37,7 @@ class DOMNodeCollection {
 
     attr(key, value) {
         if (typeof value === "string") {
-            this.forEach( (node) => node.setAttribute(key, value));
+            this.nodes.forEach( (node) => node.setAttribute(key, value));
         } else {
             return this.nodes[0].getAttribute(key);
         }

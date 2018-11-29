@@ -1,6 +1,5 @@
 const DOMNodeCollection = require('./dom_node_collection.js');
 
-
 let callbacksArr = [];
 let ready = false;
 
@@ -10,6 +9,8 @@ window.$l = (queryArg) => {
         nodesArr = [queryArg];
     } else if (queryArg && {}.toString.call(queryArg) === '[object Function]') {
         return addCallbackToDocReady(queryArg);
+    } else if (queryArg[0] === "<") {
+        nodesArr = [document.createElement(queryArg.split("<")[1].split(">")[0])];
     } else {
         nodesArr = Array.from(document.querySelectorAll(queryArg));
     }
@@ -81,13 +82,56 @@ getNews = () => {
 }
 
 handleResult = (result) => {
-    $title = $('<p></p>');
-    $title.html(result.articles[0].title);
-    $('.news').append($title);
-    $li = $('<li></li>')
-    $li.html(result.articles[0].description);
-    $('.news-list').append($li);
+    let articleNumber = getRandomNumber();
+    setTitle(result, articleNumber);
+    setImage(result, articleNumber);
+    setContent(result, articleNumber);
+    setLink(result, articleNumber);
+    addButton();
+    handleSpin();
     console.log(result);
+}
+
+getRandomNumber = () => {
+    return Math.floor((Math.random() * 20));
+};
+
+setTitle = (result, articleNumber) => {
+    let $title = $l('.news-title');
+    $title.html(result.articles[articleNumber].title);
+}
+
+setImage = (result, articleNumber) => {
+    let imageUrl = result.articles[articleNumber].urlToImage;
+    let $image = $l('.news-image');
+    $image.attr('src', imageUrl);
+}
+
+setContent = (result, articleNumber) => {
+    $content = $l('.news-content');
+    $content.html(result.articles[articleNumber].description)
+}
+
+setLink = (result, articleNumber) => {
+    let linkAddress = result.articles[articleNumber].url;
+    let source = result.articles[articleNumber].source.name;
+    $link = $l('.news-link');
+    $link.attr('href', linkAddress);
+    $link.html(`Read More On "${source}"`);
+}
+
+addButton = () => {
+    $newsBlock = $l('.news');
+    $button = $l('<button></button>');
+    $button.html('SPIN IMAGE');
+    $button.addClass('spin-button');
+    $newsBlock.append($button);
+}
+
+handleSpin = () => {
+    let $button = $l('.spin-button');
+    let $image = $l('.news-image');
+    $button.on('click', () => $image.addClass('rotate-image'));
 }
 
 
