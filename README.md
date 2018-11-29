@@ -13,7 +13,7 @@ For this project, I have implemented my own version of jQuery library using nati
     <li>Manipulating existing DOM to display news data</li>
 </ul>
 
-After user enters news keyword o phrase to search for, DOMNews makes AJAX request to https://newsapi.org, and manipulates DOM.
+
 
 <h2>API</h2>
 
