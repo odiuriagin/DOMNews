@@ -35,7 +35,7 @@ $l.extend = (base, ...otherObjects) => {
 }
 
 $l.ajax = (options) => {
-    const request = new XMLHttpRequest();
+    
     const defaults = {
       contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
       method: "GET",
