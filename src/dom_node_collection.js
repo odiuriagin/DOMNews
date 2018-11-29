@@ -53,6 +53,17 @@ class DOMNodeCollection {
         return this.nodes;
     }
 
+    toggleClass(string) {
+        this.nodes.forEach ( (node) => {
+            if (node.classList.contains(string)) {
+                node.classList.remove(string);
+            } else {
+                node.classList.add(string.trim());
+            }
+        });
+        return this.nodes;
+    }
+
     children() {
         let arr = [];
         this.nodes.forEach((node) => {

@@ -131,7 +131,11 @@ addButton = () => {
 handleSpin = () => {
     let $button = $l('.spin-button');
     let $image = $l('.news-image');
-    $button.on('click', () => $image.addClass('rotate-image'));
+    $button.on('click', () => {
+        $image.toggleClass('rotate-image');
+        let text = $button.html() === 'SPIN IMAGE' ? 'STOP SPINNING' : 'SPIN IMAGE';
+        $button.html(text);
+    });
 }
 
 
