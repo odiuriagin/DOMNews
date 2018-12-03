@@ -75,8 +75,8 @@ $l( () => {
 });
 
 getNews = () => {
-    const $input = $(".news-subject").val();
     event.preventDefault();
+    const $input = $(".news-subject").val();
     $l.ajax({method: 'get', url: `https://newsapi.org/v2/everything?q=${$input}&apiKey=47feb2c99f604fe2bb308b7ffd24335d`})
     .then((result) => handleResult(result))
 }
@@ -89,7 +89,6 @@ handleResult = (result) => {
     setLink(result, articleNumber);
     addButton();
     handleSpin();
-    console.log(result);
 }
 
 getRandomNumber = () => {

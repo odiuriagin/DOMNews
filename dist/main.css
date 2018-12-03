@@ -4,8 +4,22 @@ p {
 
 form {
     margin: 0 auto;
-    width: 28%;
+    width: 40%;
     display: flex;
+    padding-top: 50px;
+    font-size: 20px;
+}
+
+body {
+    background: url("../src/news-bg.jpg");
+    font-family: 'Domine', serif;
+}
+
+.news {
+    width: 75%;
+    margin: 0 auto;
+    background-color: rgba(228, 224, 226, 0.85);
+    padding: 15px;
 }
 
 .news-title {
