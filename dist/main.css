@@ -65,3 +65,28 @@ body {
     margin: 24px auto;
     display: block;
 }
+
+.logo img{
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+}
+
+.author-container {
+    display: flex;
+    margin: 0 auto;
+    width: 400px;
+}
+
+.author-paragraph {
+    line-height: 1.5em;
+}
+
+.author-link {
+    text-decoration: none;
+    color:#2b72bc;
+}
+
+.author-link:hover {
+    text-decoration: underline;
+}

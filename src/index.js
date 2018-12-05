@@ -17,7 +17,7 @@ window.$l = (queryArg) => {
     return new DOMNodeCollection(nodesArr);
 }
 
-addCallbackToDocReady = (callback) => {
+const addCallbackToDocReady = (callback) => {
     if (ready) {
         callback();
     } else {
@@ -70,18 +70,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 $l( () => {
-    const buttonEl = $l('.news-button');
-    buttonEl.on('click', () => getNews());
+    let $buttonEl = $l('.news-button');
+    $buttonEl.on('click', (event) => getNews(event));
 });
 
-getNews = () => {
+const getNews = (event) => {
     event.preventDefault();
     const $input = $(".news-subject").val();
     $l.ajax({method: 'get', url: `https://newsapi.org/v2/everything?q=${$input}&apiKey=47feb2c99f604fe2bb308b7ffd24335d`})
     .then((result) => handleResult(result))
 }
 
-handleResult = (result) => {
+const handleResult = (result) => {
     let articleNumber = getRandomNumber();
     setTitle(result, articleNumber);
     setImage(result, articleNumber);
@@ -91,27 +91,27 @@ handleResult = (result) => {
     handleSpin();
 }
 
-getRandomNumber = () => {
+const getRandomNumber = () => {
     return Math.floor((Math.random() * 20));
 };
 
-setTitle = (result, articleNumber) => {
+const setTitle = (result, articleNumber) => {
     let $title = $l('.news-title');
     $title.html(result.articles[articleNumber].title);
 }
 
-setImage = (result, articleNumber) => {
+const setImage = (result, articleNumber) => {
     let imageUrl = result.articles[articleNumber].urlToImage;
     let $image = $l('.news-image');
     $image.attr('src', imageUrl);
 }
 
-setContent = (result, articleNumber) => {
+const setContent = (result, articleNumber) => {
     $content = $l('.news-content');
     $content.html(result.articles[articleNumber].description)
 }
 
-setLink = (result, articleNumber) => {
+const setLink = (result, articleNumber) => {
     let linkAddress = result.articles[articleNumber].url;
     let source = result.articles[articleNumber].source.name;
     $link = $l('.news-link');
@@ -119,7 +119,7 @@ setLink = (result, articleNumber) => {
     $link.html(`Read More On "${source}"`);
 }
 
-addButton = () => {
+const addButton = () => {
     $newsBlock = $l('.news');
     $button = $l('<button></button>');
     $button.html('SPIN IMAGE');
@@ -127,7 +127,7 @@ addButton = () => {
     $newsBlock.append($button);
 }
 
-handleSpin = () => {
+const handleSpin = () => {
     let $button = $l('.spin-button');
     let $image = $l('.news-image');
     $button.on('click', () => {

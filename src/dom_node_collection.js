@@ -33,7 +33,7 @@ class DOMNodeCollection {
         });
 
         return this.nodes;
-    }
+    } 
 
     attr(key, value) {
         if (typeof value === "string") {
