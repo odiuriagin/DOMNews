@@ -22,7 +22,7 @@ For this project, I have implemented my own version of jQuery library using nati
     <li><b>$l.ajax(options)</b> - creates an asynchronous AJAX query with flexible parameters and sesible defaults.</li>
 </ul>
 
-```
+```javascript
 $l.ajax = (options) => {
     
     const defaults = {
@@ -56,7 +56,7 @@ $l.ajax = (options) => {
 
 <p><b>$l(selector)</b> - The core function that takes a CSS selector or HTML element as argument and wraps it in a DOMNodeCollection that gives us access to all its available methods. If it receives a function, it will push that fucntion into an array (queue) of functions to be executed when the document is ready.</p>
 
-```
+```javascript
 $l = (queryArg) => {
     let nodesArr;
     if (queryArg instanceof HTMLElement) {
@@ -82,7 +82,7 @@ $l = (queryArg) => {
     <li><b>attr</b> - sets each element in the DOMNodeCollection with the given attribute to the value</li>
 </ul>
 
-```
+```javascript
     attr(key, value) {
         if (typeof value === "string") {
             this.nodes.forEach( (node) => node.setAttribute(key, value));
@@ -95,7 +95,7 @@ $l = (queryArg) => {
     <li><b>toggleClass</b> - takes a string as an argument ad adds or removess class name to each element in the DOMNodeCollection.</li>
 </ul>
 
-```
+```javascript
     toggleClass(string) {
         this.nodes.forEach ( (node) => {
             if (node.classList.contains(string)) {
@@ -115,7 +115,7 @@ $l = (queryArg) => {
     <li><b>parent()</b> - returns DOMNodeCollection of the parents of each of the nodes</li>
     <li><b>find(selector)</b> - returns a DOMNodeCollection of all descendants of any nodes matching a passed selector argument.</li>
 
-```
+```javascript
     find(selector) {
         let arr = [];
         this.nodes.forEach((node) => {
