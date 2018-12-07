@@ -68,18 +68,20 @@ document.addEventListener('DOMContentLoaded', () => {
     callbacksArr.forEach( (callback) => callback());
 });
 
-
-$l( () => {
-    let $buttonEl = $l('.news-button');
-    $buttonEl.on('click', (event) => getNews(event));
-});
-
-const getNews = (event) => {
-    event.preventDefault();
+const getNews = () => {
     const $input = $(".news-subject").val();
     $l.ajax({method: 'get', url: `https://newsapi.org/v2/everything?q=${$input}&apiKey=47feb2c99f604fe2bb308b7ffd24335d`})
     .then((result) => handleResult(result))
 }
+
+$l( () => {
+    let $buttonEl = $l('.news-form');
+    $buttonEl.on('submit', (event) => {
+        event.preventDefault();
+        getNews();
+    });
+});
+
 
 const handleResult = (result) => {
     let articleNumber = getRandomNumber();

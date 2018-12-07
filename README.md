@@ -19,7 +19,7 @@ For this project, I have implemented my own version of jQuery library using nati
 
 <h3>AJAX Request</h3>
 <ul>
-    <li><b>$l.ajax(options)</b> - creates an asynchronous AJAX query with flexible parameters and sesible defaults.</li>
+    <li><b>$l.ajax(options)</b> - creates an asynchronous AJAX query with flexible parameters and sensible defaults.</li>
 </ul>
 
 ```javascript

@@ -16,6 +16,10 @@ class DOMNodeCollection {
         this.html('');
     }
 
+    each(callback) {
+        this.nodes.forEach(callback);
+    }
+
     append(el) {
         let html = "";
         if (el instanceof DOMNodeCollection) {
@@ -100,7 +104,7 @@ class DOMNodeCollection {
     }
 
     on(eventType, callback) {
-        this.nodes.forEach( (node) => {
+        this.each( (node) => {
             node.addEventListener(eventType, callback);
             const event = `jqliteEvent-${eventType}`;
             if (typeof node[event] === "undefined") {
