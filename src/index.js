@@ -68,15 +68,16 @@ document.addEventListener('DOMContentLoaded', () => {
     callbacksArr.forEach( (callback) => callback());
 });
 
+
 const getNews = () => {
     const $input = $(".news-subject").val();
     $l.ajax({method: 'get', url: `https://newsapi.org/v2/everything?q=${$input}&apiKey=47feb2c99f604fe2bb308b7ffd24335d`})
-    .then((result) => handleResult(result))
+    .then((result) => handleResult(result));
 }
 
 $l( () => {
-    let $buttonEl = $l('.news-form');
-    $buttonEl.on('submit', (event) => {
+    let $form = $l('.news-form');
+    $form.on('submit', (event) => {
         event.preventDefault();
         getNews();
     });
@@ -84,17 +85,23 @@ $l( () => {
 
 
 const handleResult = (result) => {
-    let articleNumber = getRandomNumber();
-    setTitle(result, articleNumber);
-    setImage(result, articleNumber);
-    setContent(result, articleNumber);
-    setLink(result, articleNumber);
-    addButton();
-    handleSpin();
+    console.log(result);
+    let articleNumber = getRandomNumber(result.articles.length);
+    console.log(articleNumber);
+    if (result.totalResults === 0) {
+        alert('Invalid Input!');
+    } else {
+        setTitle(result, articleNumber);
+        setImage(result, articleNumber);
+        setContent(result, articleNumber);
+        setLink(result, articleNumber);
+        addButton();
+        handleSpin();
+    }
 }
 
-const getRandomNumber = () => {
-    return Math.floor((Math.random() * 20));
+const getRandomNumber = (num) => {
+    return Math.floor((Math.random() * num));
 };
 
 const setTitle = (result, articleNumber) => {
