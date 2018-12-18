@@ -71,8 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const getNews = () => {
     const $input = $(".news-subject").val();
-    $l.ajax({method: 'get', url: `https://newsapi.org/v2/everything?q=${$input}&apiKey=47feb2c99f604fe2bb308b7ffd24335d`})
-    .then((result) => handleResult(result));
+    if ($input === "") {
+        alert("Field can't be empty!");
+    } else {
+        $l.ajax({method: 'get', url: `https://newsapi.org/v2/everything?q=${$input}&apiKey=47feb2c99f604fe2bb308b7ffd24335d`})
+        .then((result) => handleResult(result));
+    }
 }
 
 $l( () => {
@@ -85,9 +89,7 @@ $l( () => {
 
 
 const handleResult = (result) => {
-    console.log(result);
     let articleNumber = getRandomNumber(result.articles.length);
-    console.log(articleNumber);
     if (result.totalResults === 0) {
         alert('Invalid Input!');
     } else {
