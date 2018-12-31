@@ -20,6 +20,10 @@ class DOMNodeCollection {
         this.nodes.forEach(callback);
     }
 
+    val() {
+        return this.value;
+    }
+
     append(el) {
         let html = "";
         if (el instanceof DOMNodeCollection) {

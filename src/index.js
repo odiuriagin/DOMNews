@@ -4,10 +4,11 @@ let callbacksArr = [];
 let ready = false;
 
 window.$l = (queryArg) => {
+    
     let nodesArr;
     if (queryArg instanceof HTMLElement) {
         nodesArr = [queryArg];
-    } else if (queryArg && {}.toString.call(queryArg) === '[object Function]') {
+    } else if (typeof queryArg === "function") {
         return addCallbackToDocReady(queryArg);
     } else if (queryArg[0] === "<") {
         nodesArr = [document.createElement(queryArg.split("<")[1].split(">")[0])];
@@ -17,7 +18,9 @@ window.$l = (queryArg) => {
     return new DOMNodeCollection(nodesArr);
 }
 
+
 const addCallbackToDocReady = (callback) => {
+    
     if (ready) {
         callback();
     } else {
@@ -26,6 +29,7 @@ const addCallbackToDocReady = (callback) => {
 }
 
 $l.extend = (base, ...otherObjects) => {
+    
     otherObjects.forEach( (obj) => {
         for (const prop in obj) {
             base[prop] = obj[prop];
@@ -64,13 +68,15 @@ $l.ajax = (options) => {
   
 
 document.addEventListener('DOMContentLoaded', () => {
+    
     ready = true;
     callbacksArr.forEach( (callback) => callback());
 });
 
 
 const getNews = () => {
-    const $input = $(".news-subject").val();
+    
+    const $input = $l(".news-subject").val();
     if ($input === "") {
         alert("Field can't be empty!");
     } else {
@@ -89,6 +95,7 @@ $l( () => {
 
 
 const handleResult = (result) => {
+    
     let articleNumber = getRandomNumber(result.articles.length);
     if (result.totalResults === 0) {
         alert('Invalid Input!');
@@ -97,8 +104,8 @@ const handleResult = (result) => {
         setImage(result, articleNumber);
         setContent(result, articleNumber);
         setLink(result, articleNumber);
-        addButton();
-        handleSpin();
+        // addButton();
+        // handleSpin();
     }
 }
 
@@ -130,22 +137,23 @@ const setLink = (result, articleNumber) => {
     $link.html(`Read More On "${source}"`);
 }
 
-const addButton = () => {
-    $newsBlock = $l('.news');
-    $button = $l('<button></button>');
-    $button.html('SPIN IMAGE');
-    $button.addClass('spin-button');
-    $newsBlock.append($button);
-}
+// const addButton = () => {
+//     $newsBlock = $l('.news');
+//     $button = $l('<button></button>');
+//     $button.html('SPIN IMAGE');
+//     $button.addClass('spin-button');
+//     $newsBlock.append($button);
+// }
 
-const handleSpin = () => {
-    let $button = $l('.spin-button');
-    let $image = $l('.news-image');
-    $button.on('click', () => {
-        $image.toggleClass('rotate-image');
-        let text = $button.html() === 'SPIN IMAGE' ? 'STOP SPINNING' : 'SPIN IMAGE';
-        $button.html(text);
-    });
-}
+// const handleSpin = () => {
+//     let $button = $l('.spin-button');
+//     let $image = $l('.news-image');
+//     $button.on('click', (event) => {
+//         event.preventDefault();
+//         $image.toggleClass('rotate-image');
+//         let text = $button.html() === 'SPIN IMAGE' ? 'STOP SPINNING' : 'SPIN IMAGE';
+//         $button.html(text);
+//     });
+// }
 
 
