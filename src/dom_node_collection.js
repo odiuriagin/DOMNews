@@ -21,7 +21,7 @@ class DOMNodeCollection {
     }
 
     val() {
-        return this.value;
+        return this.nodes[0].value;
     }
 
     append(el) {
